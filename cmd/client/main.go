@@ -35,10 +35,16 @@ func main() {
 	defer cancel()
 
 	// Call SayHello
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
-	//r, err := c.SayHelloAgain(ctx, &pb.HelloRequest{Name: name})
+	r1, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
 	if err != nil {
 		log.Fatalf("Cloud not greet: %v", err)
 	}
-	log.Printf("Greeting: %s", r.Message)
+
+	// Call SayHelloAgain
+	r2, err := c.SayHelloAgain(ctx, &pb.HelloRequest{Name: name})
+	if err != nil {
+		log.Fatalf("Cloud not greet SayHelloAgain: %v", err)
+	}
+	log.Printf("Greeting SayHello: %v\n", r1.Message)
+	log.Printf("Greeting SayHelloAgain: %v\n", r2.Message)
 }
